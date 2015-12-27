@@ -48,6 +48,12 @@ a:visited{
     color:#7c7c7c;
 }
 
+#container h1.subtitle a:link, 
+#container h1.subtitle a:visited{
+    color:#7c7c7c;
+    opacity:1;
+}
+
 #container .table{
     float:left;
     display:block;
@@ -58,7 +64,8 @@ a:visited{
 #container .table .col-25{
     float:left;
     display:inline;
-    width:24%;
+    width:20%;
+    margin:0 2% 0 2%;
     text-align:center;
 }
 
