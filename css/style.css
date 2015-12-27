@@ -25,18 +25,16 @@ a:visited{
 #container h1{
     position:relative;
     display:inline-block;
-    text-shadow: 1px 1px #e7e7e7;
     text-align: center;
     width:100%;
     margin:5px 0 5px 0;
+    font-weight: normal;
 }
 
 #container h1.title{
     padding-top:18%;
     font-size:3em;
     font-family: 'Lucida Console', 'Lucida Sans Typewriter', monaco, 'Bitstream Vera Sans Mono', monospace;
-	font-style: normal;
-	font-variant: normal;
 }
 
 #container h1.subtitle{
