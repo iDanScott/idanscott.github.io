@@ -58,7 +58,7 @@ a:visited{
 #container .table .col-25{
     float:left;
     display:inline;
-    width:24.5%;
+    width:24%;
     text-align:center;
 }
 
@@ -70,14 +70,18 @@ a:visited{
     opacity: 0;
 }
 
-#container .table .col-25:hover a:link{
+#container .table .col-25:hover a:link, 
+#container .table .col-25:hover a:visited{
     opacity: 1;
+    color:#0084B4;
     transition:2s;
 }
 
-#container .table .col-25:hover a:link .text{
+#container .table .col-25:hover a:link .text, 
+#container .table .col-25:hover a:visited .text{
     opacity:1;
     transition:2s;
+    color:#0084B4;
 }
 
 @media all and (min-height: 900px){
