@@ -79,7 +79,7 @@ a:link{
     transition:2s;
 }
 
-@media screen (min-width: 1000px){
+@media screen (max-width: 900px){
     h1.title{
         padding-top:0;
     }
