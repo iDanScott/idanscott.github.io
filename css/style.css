@@ -5,7 +5,8 @@ html{
     font-family:arial;
 }
 
-a:link{
+a:link, 
+a:visited{
     color:#727274;
     text-decoration:none;
     opacity:0.3;
