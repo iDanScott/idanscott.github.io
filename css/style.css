@@ -19,23 +19,20 @@ a:visited{
     color: #727274;
     width:100%;
     height:100%;
-}
-
-.title-inverted{
-    color: #c3c3c3;
-    background-color:#3a3a3a;
-    text-shadow: 1px 1px #222; 
+    text-align:center;
 }
 
 #container h1{
     position:relative;
-    margin:0 auto 0 auto;
+    display:inline-block;
     text-shadow: 1px 1px #e7e7e7;
     text-align: center;
+    width:100%;
+    margin:5px 0 5px 0;
 }
 
 #container h1.title{
-    padding-top:20%;
+    padding-top:18%;
     font-size:3em;
     font-family: 'Lucida Console', 'Lucida Sans Typewriter', monaco, 'Bitstream Vera Sans Mono', monospace;
 	font-style: normal;
@@ -54,16 +51,22 @@ a:visited{
     opacity:1;
 }
 
+#container h1.subtitle a:hover{
+    transition:2s;
+    color:#0084B4;
+}
+
 #container .table{
-    float:left;
-    display:block;
+    display:inline-block;
     width:100%;
-    max-width: 1366px;
+    max-width: 1100px;
+    position:relative;
+    margin:0 auto 0 auto;
 }
 
 #container .table .col-25{
-    float:left;
     display:inline;
+    float:left;
     width:20%;
     margin:0 2% 0 2%;
     text-align:center;
