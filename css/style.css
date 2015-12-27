@@ -32,7 +32,7 @@ a:visited{
 }
 
 #container h1.title{
-    padding-top:18%;
+    padding-top:40%;
     font-size:3em;
     font-family: 'Lucida Console', 'Lucida Sans Typewriter', monaco, 'Bitstream Vera Sans Mono', monospace;
 }
@@ -92,8 +92,8 @@ a:visited{
     color:#0084B4;
 }
 
-@media all and (min-height: 900px){
-    h1.title{
-        padding-top:40%;
+@media (min-width: 700px){
+    #container h1.title{
+        padding-top:18%;
     }
 }
