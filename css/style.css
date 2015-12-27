@@ -1,0 +1,86 @@
+body, 
+html{
+    padding:0;
+    margin:0;
+    font-family:arial;
+}
+
+a:link{
+    color:#727274;
+    text-decoration:none;
+    opacity:0.3;
+}
+
+#container{
+    float:left;
+    position:relative;
+    background-color: #c3c3c3;
+    color: #727274;
+    width:100%;
+    height:100%;
+}
+
+.title-inverted{
+    color: #c3c3c3;
+    background-color:#3a3a3a;
+    text-shadow: 1px 1px #222; 
+}
+
+#container h1{
+    position:relative;
+    margin:0 auto 0 auto;
+    text-shadow: 1px 1px #e7e7e7;
+    text-align: center;
+}
+
+#container h1.title{
+    padding-top:20%;
+    font-size:3em;
+    font-family: 'Lucida Console', 'Lucida Sans Typewriter', monaco, 'Bitstream Vera Sans Mono', monospace;
+	font-style: normal;
+	font-variant: normal;
+}
+
+#container h1.subtitle{
+    font-size: 1.5em;
+    padding-bottom: 10px;
+    color:#7c7c7c;
+}
+
+#container .table{
+    float:left;
+    display:block;
+    width:100%;
+    max-width: 1366px;
+}
+
+#container .table .col-25{
+    float:left;
+    display:inline;
+    width:24.5%;
+    text-align:center;
+}
+
+#container .table .col-25 i{
+    width:100%;
+}
+
+#container .table .col-25 a:link .text{
+    opacity: 0;
+}
+
+#container .table .col-25:hover a:link{
+    opacity: 1;
+    transition:2s;
+}
+
+#container .table .col-25:hover a:link .text{
+    opacity:1;
+    transition:2s;
+}
+
+@media screen (min-width: 1000px){
+    h1.title{
+        padding-top:0;
+    }
+}
