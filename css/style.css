@@ -80,8 +80,8 @@ a:visited{
     transition:2s;
 }
 
-@media screen (max-width: 900px){
+@media all and (min-height: 900px){
     h1.title{
-        padding-top:0;
+        padding-top:40%;
     }
 }
