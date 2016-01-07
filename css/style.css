@@ -1,99 +1,31 @@
 body, 
 html{
-    padding:0;
-    margin:0;
-    font-family:arial;
-}
-
-a:link, 
-a:visited{
-    color:#727274;
-    text-decoration:none;
-    opacity:0.3;
+    padding: 0;
+    margin: 0;
+    font-family: arial;
+    background-color: #e9eaed;
+    color: #373e4d;
+    height: 100%;
+    width: 100%;
 }
 
 #container{
-    float:left;
-    position:relative;
-    background-color: #f9f9f9;
-    color: #727274;
-    width:100%;
-    height:100%;
-    text-align:center;
-}
-
-#container h1{
-    position:relative;
-    display:inline-block;
+    position: absolute;
     text-align: center;
-    width:100%;
-    margin:5px 0 5px 0;
-    font-weight: normal;
+    float: left;
+    width: 250px;
+    left: 50%;
+    top: 50%;
+    margin-left: -125px;
+    margin-top: -300px;
 }
 
-#container h1.title{
-    padding-top:40%;
-    font-size:3em;
-    font-family: 'Lucida Console', 'Lucida Sans Typewriter', monaco, 'Bitstream Vera Sans Mono', monospace;
+#container #portrait{
+    width: 250px;
+    border-radius: 50%;
 }
 
-#container h1.subtitle{
-    font-size: 1.5em;
-    padding-bottom: 10px;
-    color:#7c7c7c;
-}
 
-#container h1.subtitle a:link, 
-#container h1.subtitle a:visited{
-    color:#7c7c7c;
-    opacity:1;
-}
 
-#container h1.subtitle a:hover{
-    transition:2s;
-    color:#0084B4;
-}
 
-#container .table{
-    display:inline-block;
-    width:100%;
-    max-width: 1100px;
-    position:relative;
-    margin:0 auto 0 auto;
-}
 
-#container .table .col-25{
-    display:inline;
-    float:left;
-    width:20%;
-    margin:0 2% 0 2%;
-    text-align:center;
-}
-
-#container .table .col-25 i{
-    width:100%;
-}
-
-#container .table .col-25 a:link .text{
-    opacity: 0;
-}
-
-#container .table .col-25:hover a:link, 
-#container .table .col-25:hover a:visited{
-    opacity: 1;
-    color:#0084B4;
-    transition:2s;
-}
-
-#container .table .col-25:hover a:link .text, 
-#container .table .col-25:hover a:visited .text{
-    opacity:1;
-    transition:2s;
-    color:#0084B4;
-}
-
-@media (min-width: 700px){
-    #container h1.title{
-        padding-top:18%;
-    }
-}
