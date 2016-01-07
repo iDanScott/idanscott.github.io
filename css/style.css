@@ -86,8 +86,8 @@ ul li:hover .handle{
     transition: 0.5s;
 }
 
-@media screen and (orientation:portrait), 
-       screen and (max-width: 400px){
+@media screen and (orientation: portrait), 
+       screen and (max-width: 500px){
     .container-outer,
     .container-inner{
         width:100%;
