@@ -1,0 +1,18 @@
+<!DOCTYPE Html>
+<html>
+    <head>
+        <title>Student ID to Student Image</title>
+        <script>
+            function getImageForID(){
+                document.getElementById("imgStudent").src="https://eservices.plymouth.ac.uk/studentimages/Students/images/" + document.getElementById("txtStudentID").value + ".jpg";
+            }
+        </script>
+    </head>
+    <body>
+        <div id="container">
+            <input type="text" id="txtStudentID" name="txtStudentID" />
+            <input type="button" value="go!" onClick="getImageForID()" />
+            <img src="" alt="Student Image" id="imgStudent" />
+        </div>
+    </body>
+</html>
