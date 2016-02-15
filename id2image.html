@@ -4,9 +4,9 @@
         <title>Student ID to Student Image</title>
         <script>
             (function(){
-                if (getParameterByName('id') != "") {
-                    alert("Yeah boi");
+                if (getParameterByName('id') != "") 
                     document.getElementById("txtStudentID").value = getParameterByName('id');
+                    getImageForID();
                 }
             })();
             
