@@ -1,0 +1,36 @@
+<!DOCTYPE Html>
+<html>
+    <head>
+        <title>Student ID to Student Image</title>
+        <script>
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+            
+            function getImageForID(){
+                document.getElementById("imgStudent").src="https://eservices.plymouth.ac.uk/studentimages/Students/images/" + document.getElementById("txtStudentID").value + ".jpg";
+            }
+        </script>
+    </head>
+    <body>
+        <div id="container">
+            <input type="text" id="txtStudentID" name="txtStudentID" />
+            <input type="button" value="go!" onClick="getImageForID()" />
+            <img src="" alt="Student Image" id="imgStudent" />
+        </div>
+        <script>
+            (function(){
+                if (getParameterByName("id") != ""){
+                    document.getElementById("txtStudentID").value = getParameterByName("id");
+                    getImageForID();
+                }
+            })();
+        </script>
+    </body>
+</html>
