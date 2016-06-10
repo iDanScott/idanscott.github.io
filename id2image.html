@@ -16,6 +16,13 @@
             function getImageForID(){
                 document.getElementById("imgStudent").src="https://eservices.plymouth.ac.uk/studentimages/Students/images/" + document.getElementById("txtStudentID").value + ".jpg";
             }
+            
+            (function(){
+                if (getParameterByName('id') != "") 
+                    document.getElementById("txtStudentID").value = getParameterByName('id');
+                    getImageForID();
+                }
+            })();
         </script>
     </head>
     <body>
@@ -24,13 +31,5 @@
             <input type="button" value="go!" onClick="getImageForID()" />
             <img src="" alt="Student Image" id="imgStudent" />
         </div>
-        <script>
-            (function(){
-                if (getParameterByName("id") != ""){
-                    document.getElementById("txtStudentID").value = getParameterByName("id");
-                    getImageForID();
-                }
-            })();
-        </script>
     </body>
 </html>
