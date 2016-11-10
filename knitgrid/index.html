@@ -3,33 +3,49 @@
     <head>
         <title>Craft Pattern Designer</title>
         <style>
+            body{
+                font-family:arial;
+            }
             .cell{
                 position:relative;
-                display:inline;
-                float:left;
+                display:inline-block;
                 border:1px solid black;
             }
-            .row{
-                clear:left;
-                position:relative;
+            #settings{
                 float:left;
+                margin-right:100px;
+            }
+            #gridArea{
+                overflow-x: scroll;
+                white-space:nowrap;
+                display:block;
+                font-size:0;
+            }
+            .row{
+                font-size:0;
+                clear:left;
+                white-space:nowrap;
+                display:block;
             }
         </style>
         <script src="jscolor.min.js"></script>
     </head>
     <body onload="generateGrid()">
-        Clear on drag?<input type="checkbox" id="clear-on-drag"/><br />
-        Cell Size:<input type="number" id="cell-size" value="40" /><br />
-        Columns:<input type="number" id="columns" value="6" /><br />
-        Rows:<input type="number" id="rows" value="6" /><br />
+        <div id="settings">
+        Eraser Mode:<input type="checkbox" id="is-eraser-mode"/><br /><br />
+        Cell Size:<input type="number" id="cell-size" value="40" /><br /><br />
+        Columns:<input type="number" id="columns" value="6" /><br /><br />
+        Rows:<input type="number" id="rows" value="6" /><br /><br />
         <button class="jsColor { styleElement:'cellColor', valueElement: 'cellColor',value:'FF0000'}">Colour</button>
-        Cell Colour:<span id="cellColor"></span><br />
-        <button onclick="generateGrid()">Generate Grid</button><br />
+        Cell Colour:<span id="cellColor"></span><br /><br />
+        <button onclick="generateGrid()">Generate Grid</button><br /><br />
+        <button onClick="clearColours()">Clear Colours</button><br /><br />
+        </div>
         <div id="gridArea">
         </div>
         <script>
             var mouseState;
-            var clearOnDrag;
+            var isEraserMode;
             var newColor;
             document.onmousedown = function() {
                 mouseState = "mousedown";
@@ -56,26 +72,29 @@
             }
 
             function changeColourOnHover(cell){
-                clearOnDrag = document.getElementById("clear-on-drag").checked;
-                
-                if (mouseState == "mousedown") {
-                    if (clearOnDrag){
-                        changeColour(cell);
-                    } else if (cell.style.backgroundColor == "white" ) {
-                        changeColour(cell);
+                isEraserMode = document.getElementById("is-eraser-mode").checked;
+                if (mouseState == "mousedown"){
+                    if (isEraserMode) {
+                        cell.style.backgroundColor = "white";
+                    } else if (cell.style.backgroundColor == "white") {
+                        cell.style.backgroundColor = document.getElementById("cellColor").style.backgroundColor;
                     }
                 }
             }
 
             function changeColourOnMouseDown(cell) {
-                changeColour(cell);
+                isEraserMode = document.getElementById("is-eraser-mode").checked;
+                if (isEraserMode) {
+                    cell.style.backgroundColor = "white";
+                } else {
+                    cell.style.backgroundColor = document.getElementById("cellColor").style.backgroundColor;
+                }
             }
 
-            function changeColour(cell) {
-                if (cell.style.backgroundColor == "white"){
-                    cell.style.backgroundColor = document.getElementById("cellColor").style.backgroundColor;
-                } else {
-                    cell.style.backgroundColor = "white";
+            function clearColours() {
+                var cells = document.getElementsByClassName("cell");
+                for (var i = 0; i < cells.length; i++){
+                    cells.item(i).style.backgroundColor = "white";
                 }
             }
         </script>
