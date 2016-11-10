@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Craft Pattern Designer</title>
+        <style>
+            .cell{
+                position:relative;
+                display:inline;
+                float:left;
+                border:1px solid black;
+            }
+            .row{
+                clear:left;
+                position:relative;
+                float:left;
+            }
+        </style>
+        <script src="jscolor.min.js"></script>
+    </head>
+    <body>
+        Clear on drag?<input type="checkbox" id="clear-on-drag"/>
+        Cell Size:<input type="number" id="cell-size" value="40" />
+        Columns:<input type="number" id="columns" value="6" />
+        Rows:<input type="number" id="rows" value="6" />
+        <button class="jsColor { styleElement:'cellColor', valueElement: 'cellColor',value:'FF0000'}">Colour</button>
+        Cell Colour:<span id="cellColor"></span>
+        <button onclick="generateGrid()">Go</button>
+        <div id="gridArea">
+        </div>
+        <script>
+            var mouseState;
+            var clearOnDrag;
+            var newColor;
+            document.onmousedown = function() {
+                mouseState = "mousedown";
+            };
+
+            document.onmouseup = function() {
+                mouseState = "mouseup";
+            };
+
+            function generateGrid() {
+                var gridArea = document.getElementById("gridArea"); 
+                gridArea.innerHTML="";
+                var columns = document.getElementById("columns").value;
+                var rows = document.getElementById("rows").value;
+                var cellSize = document.getElementById("cell-size").value;
+                for (var i = 0; i < rows; i++) {
+                    gridArea.innerHTML += "<div class=\"row\">";
+                    for (var j = 0; j < columns; j++) {
+                        gridArea.innerHTML += "<div id=\"r" + i + "c" + j + "\" class=\"cell\" style=\"background-color:white;width:" + cellSize + "px;height:" + cellSize + "px;\""+
+                                              "onmousedown=\"changeColourOnMouseDown(this)\" onmouseover=\"changeColourOnHover(this)\">"; 
+                    }
+                    gridArea.innerHTML += "</div>";
+                }
+            }
+
+            function changeColourOnHover(cell){
+                clearOnDrag = document.getElementById("clear-on-drag").checked;
+                
+                if (mouseState == "mousedown") {
+                    if (clearOnDrag){
+                        changeColour(cell);
+                    } else if (cell.style.backgroundColor == "white" ) {
+                        changeColour(cell);
+                    }
+                }
+            }
+
+            function changeColourOnMouseDown(cell) {
+                changeColour(cell);
+            }
+
+            function changeColour(cell) {
+                if (cell.style.backgroundColor == "white"){
+                    cell.style.backgroundColor = document.getElementById("cellColor").style.backgroundColor;
+                } else {
+                    cell.style.backgroundColor = "white";
+                }
+            }
+        </script>
+    </body>
+</html>
