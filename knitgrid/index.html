@@ -18,13 +18,13 @@
         <script src="jscolor.min.js"></script>
     </head>
     <body onload="generateGrid()">
-        Clear on drag?<input type="checkbox" id="clear-on-drag"/>
-        Cell Size:<input type="number" id="cell-size" value="40" />
-        Columns:<input type="number" id="columns" value="6" />
-        Rows:<input type="number" id="rows" value="6" />
+        Clear on drag?<input type="checkbox" id="clear-on-drag"/><br />
+        Cell Size:<input type="number" id="cell-size" value="40" /><br />
+        Columns:<input type="number" id="columns" value="6" /><br />
+        Rows:<input type="number" id="rows" value="6" /><br />
         <button class="jsColor { styleElement:'cellColor', valueElement: 'cellColor',value:'FF0000'}">Colour</button>
-        Cell Colour:<span id="cellColor"></span>
-        <button onclick="generateGrid()">Go</button>
+        Cell Colour:<span id="cellColor"></span><br />
+        <button onclick="generateGrid()">Generate Grid</button><br />
         <div id="gridArea">
         </div>
         <script>
