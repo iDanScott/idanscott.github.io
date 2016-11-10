@@ -30,9 +30,11 @@
         </style>
         <script src="jscolor.min.js"></script>
     </head>
-    <body onload="generateGrid()">
+    <body onload="initialiseVariables()">
         <div id="settings">
-        Eraser Mode:<input type="checkbox" id="is-eraser-mode"/><br /><br />
+        Overwrite Colours on drag:<input type="checkbox" id="overwrite-on-drag" onclick="updateOverwriteOnDrag()" /><br /><br />
+        Overwrite Colours on click:<input type="checkbox" id="overwrite-on-click" onclick="updateOverwriteOnClick()" checked="true" /><br /><br />
+        Eraser Mode:<input type="checkbox" id="is-eraser-mode" onclick = "updateEraserMode()"/><br /><br />
         Cell Size:<input type="number" id="cell-size" value="40" /><br /><br />
         Columns:<input type="number" id="columns" value="6" /><br /><br />
         Rows:<input type="number" id="rows" value="6" /><br /><br />
@@ -46,7 +48,10 @@
         <script>
             var mouseState;
             var isEraserMode;
+            var isOverwriteOnClickEnabled;
+            var isOverwriteOnDragEnabled;
             var newColor;
+
             document.onmousedown = function() {
                 mouseState = "mousedown";
             };
@@ -54,6 +59,13 @@
             document.onmouseup = function() {
                 mouseState = "mouseup";
             };
+
+            function initialiseVariables() {
+                isOverwriteOnDragEnabled = document.getElementById("overwrite-on-drag").checked;
+                isOverwriteOnClickEnabled = document.getElementById("overwrite-on-click").checked;
+                isEraserMode = document.getElementById("is-eraser-mode").checked;
+                generateGrid();
+            }
 
             function generateGrid() {
                 var gridArea = document.getElementById("gridArea"); 
@@ -71,23 +83,35 @@
                 }
             }
 
-            function changeColourOnHover(cell){
+            function updateOverwriteOnDrag() {
+                isOverwriteOnDragEnabled = document.getElementById("overwrite-on-drag").checked;
+            }
+
+            function updateEraserMode() {
                 isEraserMode = document.getElementById("is-eraser-mode").checked;
+            }
+
+            function updateOverwriteOnClick() {
+                isOverwriteOnClickEnabled = document.getElementById("overwrite-on-click").checked;
+            }
+
+            function changeColourOnHover(cell){
                 if (mouseState == "mousedown"){
                     if (isEraserMode) {
                         cell.style.backgroundColor = "white";
-                    } else if (cell.style.backgroundColor == "white") {
+                    } else if (isOverwriteOnDragEnabled || cell.style.backgroundColor == "white") {
                         cell.style.backgroundColor = document.getElementById("cellColor").style.backgroundColor;
                     }
                 }
             }
 
             function changeColourOnMouseDown(cell) {
-                isEraserMode = document.getElementById("is-eraser-mode").checked;
                 if (isEraserMode) {
                     cell.style.backgroundColor = "white";
-                } else {
+                } else if (isOverwriteOnClickEnabled || cell.style.backgroundColor == "white") {
                     cell.style.backgroundColor = document.getElementById("cellColor").style.backgroundColor;
+                } else {
+                    console.log("wah");
                 }
             }
 
