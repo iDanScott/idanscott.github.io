@@ -10,6 +10,11 @@ html{
     font-size:1.3em;
 }
 
+.inverse{
+    background-color: #1f1f1f;
+    color: #e9eaed;
+}
+
 #profile-container{
     background:none !important;
     position:relative;
@@ -66,6 +71,20 @@ html{
 
 #bio {
     padding: 0 50px 0 50px;
+}
+
+#portfolio{
+    text-align:center;
+}
+
+#portfolio .item {
+    width: 30%;
+    display:inline-block;
+    text-align:center;
+}
+
+#portfolio .item p{
+    text-align:left;
 }
 
 @media only screen and (max-width:500px){
