@@ -10,13 +10,35 @@ html{
     font-size:1.3em;
 }
 
+a:link, 
+a:visited{
+    text-decoration:none;
+    color: #e9eaed;
+}
+
+#contact a:link, 
+#contact a:visited{
+    color: #1f1f1f;
+}
+
+.github:hover{
+    color: purple;
+}
+
+.twitter:hover{
+    color: cyan;
+}
+
+.linkedin:hover {
+    color:blue;
+}
+
 .inverse{
     background-color: #1f1f1f;
     color: #e9eaed;
 }
 
 #profile-container{
-    background:none !important;
     position:relative;
     width:100%;
     height:100%;
@@ -24,12 +46,14 @@ html{
 
 #background-container{
     position:absolute;
+    z-index: 0;
     left:0;
     top:0;
     width:100%;
     height:100%;
     background-image:url("../img/background.jpg");
-    background-size:100%;
+    background-position: center;
+    background-size: auto;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -47,7 +71,7 @@ html{
 
 #profile-container #profile{
     color:#e9eaed;
-    top:20%;
+    top:100px;
     text-align:center;
     position:relative;
     text-shadow: -1px 0px 0px rgba(0, 0, 0, 1);
@@ -79,27 +103,56 @@ html{
 
 #portfolio .item {
     width: 30%;
+    min-width:300px;
     display:inline-block;
-    text-align:center;
+    vertical-align: top;
 }
 
 #portfolio .item p{
     text-align:left;
+    font-size: 0.7em;
+    margin:0;
+}
+
+#portfolio p.title{
+    font-size: 1.4em ;
+    font-weight:bold;
+    margin:10px 0;
+    height:100px;
+}
+
+#portfolio p.desc{
+    height:110px;
+}
+
+#contact .column {
+    width:24%;
+    text-align:center;
+    display: inline-block;
+}
+
+#contact .column i {
+    font-size: 2em;
 }
 
 @media only screen and (max-width:500px){
-    #background-container{
-        background-position: center;
-        background-size: auto;
-    }
     #profile-container #profile{
-        top:20%;
+        top:10px;
     }
+
     .centered-container{
+        width:100%;
+    }
+
+    #portfolio .item{
         width:100%;
     }
 
     #bio{
         padding: 0;
+    }
+
+    #contact .column{
+        width:45%;
     }
 }
