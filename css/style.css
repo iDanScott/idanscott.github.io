@@ -135,7 +135,7 @@ a:visited{
     font-size: 2em;
 }
 
-@media only screen and (min-width:1200px){
+@media only screen and (min-width:1400px){
     #background-container{
         background-size:100%;
     }
