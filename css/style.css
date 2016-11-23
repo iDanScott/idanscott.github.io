@@ -135,6 +135,12 @@ a:visited{
     font-size: 2em;
 }
 
+@media only screen and (min-width:1800px){
+    #background-container{
+        background-size:100%;
+    }
+}
+
 @media only screen and (max-width:500px){
     #profile-container #profile{
         top:10px;
