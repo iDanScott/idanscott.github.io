@@ -167,6 +167,11 @@ a:visited{
         width:100%;
     }
 
+    #portfolio .item .title{
+        padding:0;
+        margin:0;
+    }
+
     #bio{
         padding: 0;
     }
