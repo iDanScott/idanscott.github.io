@@ -86,6 +86,10 @@ a:visited{
     height:300px;
 }
 
+#hyphen{
+    display:none;
+}
+
 .centered-container{
     position:relative;
     width: 80%;
@@ -174,7 +178,11 @@ a:visited{
 }
 
 @media only screen and (max-height:500px){
-    #profile{
-        display:none;
+    #hyphen{
+        display:inline;
+    }
+    #profile h1, 
+    #profile h2{
+        display:inline;
     }
 }
