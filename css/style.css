@@ -173,7 +173,7 @@ a:visited{
     }
 }
 
-@media only screen and (max-height:300px){
+@media only screen and (max-height:500px){
     #portrait{
         display:none;
     }
