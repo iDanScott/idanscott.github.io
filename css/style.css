@@ -172,3 +172,9 @@ a:visited{
         height:150px;
     }
 }
+
+@media only screen and (max-height:300px){
+    #portrait{
+        display:none;
+    }
+}
