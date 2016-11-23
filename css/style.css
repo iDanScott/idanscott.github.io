@@ -161,7 +161,7 @@ a:visited{
 }
 
 
-@media only screen and (max-height:500px) {
+@media only screen and (max-height:750px) {
     #profile-container #profile{
         top:10px;
         font-size:1em;
