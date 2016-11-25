@@ -6,9 +6,17 @@ body{
 }
 
 #window-wrapper{
-    position:relative;
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin:-250px 0 0 -250px;
     width:500px;
-    height:600px;
+    height:500px;
     border: 1px solid black;
 }
 
+.row-1{
+    position:relative;
+    height:100px;
+    width:100%;
+}

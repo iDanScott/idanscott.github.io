@@ -2,15 +2,15 @@
 <html>
     <head>
         <title>Soft 252 UI Mockups</title>
-        <link rel="stylesheet" href="../styles.css" />
+        <link rel="stylesheet" href="../styles/style.css" />
+        <script
+            src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
         <script
             src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
             integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
             crossorigin="anonymous"></script>     
-        <script
-            src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-            crossorigin="anonymous"></script>
         <script>
             $(function() {
                 $("#window-wrapper").draggable();
@@ -19,7 +19,14 @@
     </head>
     <body>
         <div id="window-wrapper" class="ui-widget-content">
-            drag me!!
+            <div id="window-border" style="height:20px; width:100%; border-bottom:1px solid black"></div>
+            <div class="row-1" style="border-bottom:1px solid black">
+                <div id="car-image" style="margin: 5px; width:100px; height:95px; border:1px solid black; display: inline-block">
+                    
+                </div>
+                <div id="car-description" style="width:300px; height:95px; margin:5px; border:1px solid black; display:inline-block">
+                </div>
+            </div>
         </div>
     </body>
 </html>
