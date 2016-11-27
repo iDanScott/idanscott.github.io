@@ -4,16 +4,23 @@
         <title>test</title>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <style>
+            body{
+                width:100%;
+                height:100%;
+                margin:0;
+            }
+        </style>
         <script>
             $( function() {
                 var bgcolor = $('#bgcolor');
                 bgcolor.click(function(){
-                    $("body").css({"background-color" : bgcolor.value});
+                    $("#body").css({"background-color" : bgcolor.value});
                 });
             } );
         </script>
     </head>
-    <body>
+    <body id="body">
         <input id="bgcolor" name="bgcolor" type="color" />        
     </body>
 </html>
