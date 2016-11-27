@@ -123,11 +123,10 @@ a:visited{
     font-size: 1.4em ;
     font-weight:bold;
     margin:10px 0;
-    height:100px;
 }
 
 #portfolio p.desc{
-    height:110px;
+    height:60px;
 }
 
 #contact .column {
@@ -171,6 +170,10 @@ a:visited{
     #portfolio .item .title{
         padding:0;
         margin:0;
+    }
+    
+    #portfolio p.desc{
+        height:auto;
     }
 
     #bio{
