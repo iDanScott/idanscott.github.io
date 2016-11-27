@@ -6,8 +6,9 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
             $( function() {
-                $('#bgcolor').click({
-                    $('body').css("background-color", $(this).value);
+                var bgcolor = $('#bgcolor');
+                bgcolor.click({
+                    $('body').css("background-color", bgcolor.value);
                 });
             } );
         </script>
