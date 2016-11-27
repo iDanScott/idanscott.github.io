@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>scrollable</title>
+    <style type="text/css">
+      #draggable1{
+        width:200px;
+        height:200px;
+        border:1px solid black;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $( function() {
+        $( "#draggable1" ).draggable();
+      } );
+    </script>
+  </head>
+  <body>
+    <div id="draggable1"><p>this is some content to drag</p></div>
+  </body>
+</html>
