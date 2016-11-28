@@ -9,18 +9,20 @@
                 width:100%;
                 height:100%;
                 margin:0;
+                position:absolute;
             }
         </style>
         <script>
             $( function() {
-                var bgcolor = $('#bgcolor');
-                bgcolor.click(function(){
-                    $('#body').css('background-color', bgcolor.value);
+                var bgcolor = $("#bgcolor");
+                bgcolor.change(function(){
+                    $('body').css("background-color", bgcolor.val());
+                    console.log("fired, attempting to change color to: " + bgcolor.val());
                 });
-            } );
+            });
         </script>
     </head>
-    <body id="body">
-        <input id="bgcolor" name="bgcolor" type="color" />        
+    <body>
+        <input id="bgcolor" name="bgcolor" type="color" value="#ffffff" />        
     </body>
 </html>
