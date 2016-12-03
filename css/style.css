@@ -102,6 +102,15 @@ a:visited{
     margin-bottom: 50px;
 }
 
+#bio a:link, 
+#bio a:visited {
+    color:black;
+}
+
+#bio a:hover {
+    color:dodgerblue;
+}
+
 #portfolio{
     text-align:center;
 }
