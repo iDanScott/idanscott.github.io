@@ -40,17 +40,27 @@
 			$("#btn-say").css("height", ($("#lbl-output").height()));
 		}
 		
+		function checkRepeat() {
+			
+		}
+		
 		$(function() {
 			editHeights();
 			$(window).resize(function() {
 				editHeights();
 			});
 			
+			$("#txt-output").keyup(function() {
+				if ($("#txt-output").val() == null || $("#txt-output").val() == "") { 
+					$("#btn-repeat").hide();
+				} else {
+					$("#btn-repeat").show();
+				}
+			});
+			
 			$(".sub-menu").each(function() {
 				$(this).append('<div class="button main-menu">Main menu</div>');
 			});
-			
-			
 			
 			$(".button").click(function() {
 				if ($(this).hasClass("audio")){ 
@@ -61,6 +71,7 @@
 							if ($(this).hasClass("phrase")) {
 								responsiveVoice.speak($(this).text());
 								$("#txt-output").val($(this).text());
+								$("#btn-repeat").show();
 							}
 						});
 					}
@@ -92,9 +103,7 @@
 			</div>
 		</div>
 		<div id="container">
-			<div id="repeat-container" style="float:left; width:100%;">
-				<div class="button audio repeat" >Repeat</div>
-			</div>
+			<div class="button audio repeat" id="btn-repeat" style="display:none;">Repeat<p class="icon"><i class="fa fa-repeat" aria-hidden="true"></i></p></div>
 			<div id="main-menu">
 				<div class="button audio">Yes<p class="icon"><i class="fa fa-thumbs-o-up" style="color:lime" aria-hidden="true"></i></p><span class="phrase">Yes</span></div>
 				<div class="button audio">No<p class="icon"><i class="fa fa-thumbs-o-down" style="color:red" aria-hidden="true"></i></p><span class="phrase">No</span></div>
@@ -105,11 +114,13 @@
 				<div class="button audio">Help<p class="icon"><i class="fa fa-handshake-o"></i></p><span class="phrase">Help me</span></div>
 				<div class="button audio">Please<img src="images/please.PNG" alt="please image" /><span class="phrase">Please</span></div>
 				<div class="button audio">Thank you<img src="images/thank-you.PNG" alt="thank you image" /><span class="phrase">Thank you</span></div>
+				<div class="button" id="btn-leisure">Leisure<p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
+				<div class="button" id="btn-food">Food<img src="images/food.png" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
 				<!--<div class="button audio">Fetty wap<img style="width:100%" src="http://assets4.capitalxtra.com/2015/23/fetty-wap-3-1433931367-view-0.png"/><span class="phrase">Seventeen Thirty Eight, ey I said hey what's up hello, seen your pretty eyes as you walked in the doe</span></div>-->
 				<div class="button" id="btn-feel">I feel<img src="images/i-feel.PNG" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
 				<div class="button" id="btn-want">I want<img src="images/i-want.PNG" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
 				<div class="button" id="btn-need">I need<img src="images/need.png" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
-				<div class="button" id="btn-would-like">I would like<img src="images/like.png" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
+				<!--<div class="button" id="btn-would-like">I would like<img src="images/like.png" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>-->
 				<!--<div class="button" id="btn-chat">Chat<p class="arrow"><i class="fa fa-arrow-right"></i></p></div>-->
 				<div class="button" id="btn-about">About me<p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
 				<div class="button" id="btn-people">People<p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
@@ -134,17 +145,28 @@
 			</div>
 			<div class="sub-menu" id="sub-want">
 				<div class="button audio">A bath<p class="icon"><i class="fa fa-bath" aria-hidden="true"></i></p><span class="phrase">I want a bath</span></div>
-				<div class="button" id="btn-want-go">To go</div>
+				<div class="button" id="btn-want-go">To go<img src="images/to-go.png" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
 			</div>
 			<div class="sub-menu" id="sub-want-go">
 				<div class="button audio">To bed<span class="phrase">I want to go to bed</span></div>
 				<div class="button audio">To the toilet<span class="phrase">I want to go to the toilet</span></div>
 				<div class="button audio">To the café<span class="phrase">I want to go to the café</span></div>
-				<div class="button audio">Shopping<span class="phrase">I want to go shopping</span></div>
-				<div class="button audio">Swimming<span class="phrase">I want to go swimming</span></div>
 			</div>
 			<div class="sub-menu" id="sub-need">
 				<div class="button audio">The toilet<span class="phrase">I need the toilet</span></div>
+			</div>
+			<div class="sub-menu" id="sub-leisure">
+				<div class="button audio">Shopping<span class="phrase">I woule like to go shopping</span></div>
+				<div class="button audio">Swimming<span class="phrase">I would like to go swimming</span></div>
+			</div>
+			<div class="sub-menu" id="sub-food">
+				<div class="button audio">Some food<span class="phrase">I would like some food</span></div>
+				<div class="button audio">Burger<span class="phrase">I would like a burger</span></div>
+				<div class="button" id="btn-sandwich-filling">Sandwich<img src="images/sandwich.png" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
+			</div>
+			<div class="sub-menu" id="sub-sandwich-filling">
+				<div class="button audio">Bacon<img src="images/bacon.gif" /><span class="phrase">I would like a bacon sandwich</span></div>
+				<div class="button audio">Tuna<img src="images/tuna.png" /><span class="phrase">I would like a tuna sandwich</span></div>
 			</div>
 		</div>
 	</body>
