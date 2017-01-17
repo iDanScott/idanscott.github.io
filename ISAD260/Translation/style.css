@@ -17,6 +17,30 @@ img {
 	margin:0 auto 0 auto;
 }
 
+#top-bar{
+	width:100%;
+	background-color:white;
+	padding:1%;
+}
+
+#lbl-output{
+	font-size:1.5em;
+	margin:0;
+	display:inline;
+	padding-right:1%;
+}
+
+#title{
+	width:100%;
+	text-align: center;
+	font-size:2em;
+	margin:0;
+}
+
+#txt-output{
+	font-size:1.5em;
+}
+
 .sub-menu {
 	display:none;
 }

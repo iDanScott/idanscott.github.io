@@ -34,6 +34,10 @@
 				$(this).css("left", ($(this).parent().width() - 32) + "px");
 				$(this).css("top", ($(this).parent().height() - 35) + "px");
 			});
+			
+			$("#txt-output").css("width", ($(window).width() - ($("#lbl-output").position().left + $("#lbl-output").width()) - $("#btn-say").width() - 50) + "px");
+			$("#txt-output").css("height", ($("#lbl-output").height()));
+			$("#btn-say").css("height", ($("#lbl-output").height()));
 		}
 		
 		$(function() {
@@ -51,6 +55,7 @@
 					$(this).children().each(function() {
 						if ($(this).hasClass("phrase")) {
 							responsiveVoice.speak($(this).text());
+							$("#txt-output").val($(this).text());
 						}
 					});
 				} else if ($(this).hasClass("main-menu")) {
@@ -73,14 +78,20 @@
 		});
 		</script>
 	</head>
-	<body>
+	<body>	
+		<div id="top-bar">
+			<p id="title">Augmented and Alternative Communication</p>
+			<div id="sound-output">
+				<p id="lbl-output">You are saying:</p><input type="text" id="txt-output" />
+				<input type="button" value="Say!" id="btn-say" />
+			</div>
+		</div>
 		<div id="container">
 			<div id="main-menu">
 				<div class="button audio">Yes<p class="icon"><i class="fa fa-thumbs-o-up" style="color:lime" aria-hidden="true"></i></p><span class="phrase">Yes</span></div>
 				<div class="button audio">No<p class="icon"><i class="fa fa-thumbs-o-down" style="color:red" aria-hidden="true"></i></p><span class="phrase">No</span></div>
 				<div class="button audio">Maybe<p class="icon"><i class="fa fa-question" style="color:orange" aria-hidden="true"></i></p><span class="phrase">Maybe</span></div>
-				<div class="button audio">I<p class="icon"><i class="fa fa-user" aria-hidden="true"></i></p><span class="phrase">I</span></div>
-				<div class="button audio">I don't know<p class="icon"><i class="fa fa-meh-o" aria-hidden="true"></i></p><span class="phrase">I don't know</span></div>
+				<div class="button audio">I don't know<img src="images/dont-know.png" /><span class="phrase">I don't know</span></div>
 				<!--<div class="button audio">Repeat<span class="phrase">Can you repeat the question</span></div>
 				<div class="button audio">Boss<span class="phrase">You're not the boss of me now, do do do do, you're not the boss of me now</span></div>-->
 				<div class="button audio">Help<p class="icon"><i class="fa fa-handshake-o"></i></p><span class="phrase">Help me</span></div>
@@ -89,25 +100,29 @@
 				<!--<div class="button audio">Fetty wap<img style="width:100%" src="http://assets4.capitalxtra.com/2015/23/fetty-wap-3-1433931367-view-0.png"/><span class="phrase">Seventeen Thirty Eight, ey I said hey what's up hello, seen your pretty eyes as you walked in the doe</span></div>-->
 				<div class="button" id="btn-feel">I feel<img src="images/i-feel.PNG" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
 				<div class="button" id="btn-want">I want<img src="images/i-want.PNG" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
-				<div class="button" id="btn-need">I need<p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
-				<div class="button" id="btn-would-like">I would like<p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
-				<div class="button" id="btn-chat">Chat<p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
+				<div class="button" id="btn-need">I need<img src="images/need.png" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
+				<div class="button" id="btn-would-like">I would like<img src="images/like.png" /><p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
+				<!--<div class="button" id="btn-chat">Chat<p class="arrow"><i class="fa fa-arrow-right"></i></p></div>-->
 				<div class="button" id="btn-about">About me<p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
 				<div class="button" id="btn-people">People<p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
+				<div class="button" id="btn-custom">Custom<p class="arrow"><i class="fa fa-arrow-right"></i></p></div>
+			</div>
+			<div class="sub-menu" id="sub-custom">
+				<div class="button audio">I<p class="icon"><i class="fa fa-user" aria-hidden="true"></i></p><span class="phrase">I</span></div>
 			</div>
 			<div class="sub-menu" id="sub-about">
-				<div class="button audio">My name<span class="phrase">My name is Dan</span></div>
+				<div class="button audio">My name<p class="icon">Dan</p><span class="phrase">My name is Dan</span></div>
 			</div>
 			<div class="sub-menu" id="sub-feel">
-				<div class="button audio">Tired<p<span class="phrase">I feel tired</span></div>
-				<div class="button audio">Hungry<span class="phrase">I feel hungry</span></div>
-				<div class="button audio">Angry<span class="phrase">I feel angry</span></div>
-				<div class="button audio">Happy<span class="phrase">I feel happy</span></div>
-				<div class="button audio">Scared<span class="phrase">I feel scared</span></div>
-				<div class="button audio">Sad<span class="phrase">I feel sad</span></div>
-				<div class="button audio">Confused<span class="phrase">I feel confused</span></div>
-				<div class="button audio">Hot<span class="phrase">I feel hot</span></div>
-				<div class="button audio">Cold<span class="phrase">I feel cold</span></div>
+				<div class="button audio">Tired<img src="images/i-feel-tired.PNG" /><span class="phrase">I feel tired</span></div>
+				<div class="button audio">Hungry<img src="images/i-feel-hungry.PNG" /><span class="phrase">I feel hungry</span></div>
+				<div class="button audio">Angry<img src="images/angry.jpg" /><span class="phrase">I feel angry</span></div>
+				<div class="button audio">Happy<p class="icon"><i class="fa fa-smile-o"></i></p><span class="phrase">I feel happy</span></div>
+				<div class="button audio">Scared<img src="images/scared.png" /><span class="phrase">I feel scared</span></div>
+				<div class="button audio">Sad<p class="icon"><i class="fa fa-frown-o"></i></p><span class="phrase">I feel sad</span></div>
+				<div class="button audio">Confused<img src="images/confused.png" /><span class="phrase">I feel confused</span></div>
+				<div class="button audio">Hot<p class="icon" style="color:red"><i class="fa fa-thermometer-full"></i></p><span class="phrase">I feel hot</span></div>
+				<div class="button audio">Cold<p class="icon" style="color:blue"><i class="fa fa-thermometer-empty"></i></p><span class="phrase">I feel cold</span></div>
 			</div>
 			<div class="sub-menu" id="sub-want">
 				<div class="button audio">A bath<p class="icon"><i class="fa fa-bath" aria-hidden="true"></i></p><span class="phrase">I want a bath</span></div>
