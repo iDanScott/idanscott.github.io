@@ -11,6 +11,12 @@ html {
 	font-size:25px;
 }
 
+ul, 
+ul li {
+	list-style:none;
+	padding:0;
+}
+
 /*
 .bus {
 	position:relative;
@@ -28,6 +34,12 @@ html {
 #bus-route {
 	float:right;	
 	display:none;
+	border:1px solid black;
+	padding:20px;
+}
+
+#bus-route h1 {
+	font-size:16pt;
 }
 
 #stop-timetable{
@@ -35,7 +47,11 @@ html {
 	display:none;
 }
 
-p.stop {
+#city-map {
+	position:relative;
+}
+
+#city-map p.stop {
 	position:absolute;
 	color:blue;
 	border: 1px solid red;

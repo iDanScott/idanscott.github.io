@@ -5,7 +5,7 @@ var DIRECTION_RIGHT = 3;
 var DIRECTION_UP = 4;
 
 var timerContainer;
-var speed = 20;
+var speed = 40;
 //data containers
 var stops = [new stop(1, 100, 50), 
 			 new stop(2, 300, 100), 

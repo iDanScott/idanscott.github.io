@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Autism Translation</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script
+		  src="https://code.jquery.com/jquery-3.1.1.min.js"
+		  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		  crossorigin="anonymous"></script>
+		  <script
+		  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+		  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+		  crossorigin="anonymous"></script>
+		  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+		<script language="javascript">
+		function editHeights() {
+			$(".button").each(function() {
+				$(this).css("height", $(this).css("width"));
+			});
+		}
+		$(function() {
+			editHeights();
+			$(window).resize(function() {
+				editHeights();
+			});
+			
+			$(".button").click(function() {
+				if ($(this).hasClass("audio")){ 
+					switch ($(this).attr("id")) {
+						case "feel-tired":
+							responsiveVoice.speak("I feel tired");
+							break;
+					}
+				}
+				else if ($(this).text() == "Return") {
+					$(".sub-menu").each(function() {
+						if ($(this).css("display") != "none") {
+							$(this).hide();
+						}
+					});
+					$("#main-menu").show();
+				} else {
+					if ($("#main-menu").css("display") != "none") {
+						$("#main-menu").hide();
+						switch ($(this).attr("id")) {
+							case "btn-feel":
+								$("#sub-feel").show();
+								break;
+						}
+					}
+				}
+				editHeights();
+			});
+		});
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="main-menu">
+				<div class="button" id="btn-feel">I feel</div>
+				<div class="button" id="btn-want">I want</div>
+				<div class="button" id="btn-want-to-go">I want to go</div>
+				<div class="button" id="btn-need">I need</div>
+				<div class="button" id="btn-chat">Chat</div>
+				<div class="button" id="btn-about">About me</div>
+				<div class="button" id="btn-people">People</div>
+			</div>
+			<div class="sub-menu" id="sub-feel">
+				<div class="button audio" id="feel-tired">Tired</div>
+				<div class="button main-menu">Return</div>
+			</div>
+		</div>
+	</body>
+</html>

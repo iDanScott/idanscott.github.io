@@ -1,0 +1,31 @@
+body, 
+html{
+	width:100%;
+	height:100%;
+	position:relative;
+	padding:0;
+	margin:0;
+	font-family: arial;
+	background-color:#E0E0E0;
+}
+
+.sub-menu {
+	display:none;
+}
+
+.button{
+	border: 1px solid black;
+	background-color:white;
+	border-radius:5px;
+	width:47%;
+	margin:1%;
+	float:left;
+	text-align:center;
+	font-size:2em;
+}
+
+@media only screen and (min-width: 700px) { 
+	.button{
+		width:17%;
+	}
+}

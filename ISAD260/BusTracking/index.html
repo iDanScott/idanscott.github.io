@@ -13,10 +13,17 @@
 		  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
 		  crossorigin="anonymous"></script>
 		<script src="bus-timetable.js" language="javascript"></script>
+		<script language="javascript">
+			$(function() {
+				$("#stop-timetable").draggable();
+				$("#bus-route").draggable();
+			});
+		</script>
 	</head>
 	<body>
 		<div id="bus-route">
-			<h1>Viewing timetable for bus:<span id="bus-id"></span></h1>
+			<h1><i class="fa fa-bus"></i> Bus Timetable</h1>
+			<p>Bus Code: <span id="bus-id"></span></p>
 			<ul id="route-stops">
 				
 			</ul>
@@ -24,6 +31,7 @@
 		<div id="stop-timetable">
 			<h1></h1>
 		</div>
+		<p>Click on any bus to view where it's going.</p>
 		<div id="city-map">
 		</div>
 	</body>
