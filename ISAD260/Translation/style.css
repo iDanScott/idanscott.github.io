@@ -9,6 +9,14 @@ html{
 	background-color:#E0E0E0;
 }
 
+img {
+	width: 60%;
+	height: 60%;
+	display:block;
+	text-align:center;
+	margin:0 auto 0 auto;
+}
+
 .sub-menu {
 	display:none;
 }
