@@ -14,6 +14,10 @@
 		  crossorigin="anonymous"></script>
 		  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 		<script language="javascript">
+		$.fn.child = function(s) {
+			return $(this).chilren(s)[0];
+		}
+		
 		function editHeights() {
 			$(".button").each(function() {
 				$(this).css("height", $(this).css("width"));
@@ -25,29 +29,31 @@
 				editHeights();
 			});
 			
+			$(".sub-menu").each(function() {
+				$(this).append('<div class="button main-menu">Main menu</div>');
+			});
+			
 			$(".button").click(function() {
 				if ($(this).hasClass("audio")){ 
-					switch ($(this).attr("id")) {
-						case "feel-tired":
-							responsiveVoice.speak("I feel tired");
-							break;
-					}
-				}
-				else if ($(this).text() == "Return") {
-					$(".sub-menu").each(function() {
-						if ($(this).css("display") != "none") {
-							$(this).hide();
+					$(this).children().each(function() {
+						if ($(this).hasClass("phrase")) {
+							responsiveVoice.speak($(this).text());
 						}
 					});
+				} else if ($(this).hasClass("main-menu")) {
+					$(this).parent().hide();
 					$("#main-menu").show();
 				} else {
-					if ($("#main-menu").css("display") != "none") {
-						$("#main-menu").hide();
-						switch ($(this).attr("id")) {
-							case "btn-feel":
-								$("#sub-feel").show();
-								break;
+					if ($(this).parent().css("display") != "none") {
+						$(this).parent().hide();
+						var split = $(this).attr("id").split("-");
+						var sub = "";
+						for (var i = 1; i < split.length; i++) {
+							sub += split[i];
+							if (i != split.length - 1) sub += "-";
 						}
+						$("#sub-" + sub).show();
+						console.log(sub);
 					}
 				}
 				editHeights();
@@ -58,17 +64,44 @@
 	<body>
 		<div id="container">
 			<div id="main-menu">
+				<div class="button audio">Yes<span class="phrase">Yes</span></div>
+				<div class="button audio">No<span class="phrase">No</span></div>
+				<div class="button audio">Maybe<span class="phrase">Maybe</span></div>
+				<div class="button audio">Don't know<span class="phrase">I don't know</span></div>
+				<div class="button audio">Help<span class="phrase">Help me</span></div>
+				<div class="button audio">Please<span class="phrase">Please</span></div>
+				<div class="button audio">Thank you<span class="phrase">Thank you</span></div>
 				<div class="button" id="btn-feel">I feel</div>
 				<div class="button" id="btn-want">I want</div>
-				<div class="button" id="btn-want-to-go">I want to go</div>
 				<div class="button" id="btn-need">I need</div>
+				<div class="button" id="btn-would-like">I would like</div>
 				<div class="button" id="btn-chat">Chat</div>
 				<div class="button" id="btn-about">About me</div>
 				<div class="button" id="btn-people">People</div>
 			</div>
+			<div class="sub-menu" id="sub-about">
+				<div class="button audio">My name<span class="phrase">My name is Dan</span></div>
+			</div>
 			<div class="sub-menu" id="sub-feel">
-				<div class="button audio" id="feel-tired">Tired</div>
-				<div class="button main-menu">Return</div>
+				<div class="button audio">Tired<span class="phrase">I feel tired</span></div>
+				<div class="button audio">Hungry<span class="phrase">I feel hungry</span></div>
+				<div class="button audio">Angry<span class="phrase">I feel angry</span></div>
+				<div class="button audio">Happy<span class="phrase">I feel happy</span></div>
+				<div class="button audio">Sad<span class="phrase">I feel sad</span></div>
+			</div>
+			<div class="sub-menu" id="sub-want">
+				<div class="button audio">A bath<span class="phrase">I want a bath</span></div>
+				<div class="button" id="btn-want-go">To go</div>
+			</div>
+			<div class="sub-menu" id="sub-want-go">
+				<div class="button audio">To bed<span class="phrase">I want to go to bed</span></div>
+				<div class="button audio">To the toilet<span class="phrase">I want to go to the toilet</span></div>
+				<div class="button audio">To the café<span class="phrase">I want to go to the café</span></div>
+				<div class="button audio">Shopping<span class="phrase">I want to go shopping</span></div>
+				<div class="button audio">Swimming<span class="phrase">I want to go swimming</span></div>
+			</div>
+			<div class="sub-menu" id="sub-need">
+				<div class="button audio">The toilet<span class="phrase">I need the toilet</span></div>
 			</div>
 		</div>
 	</body>

@@ -13,6 +13,10 @@ html{
 	display:none;
 }
 
+.phrase{
+	display:none;
+}
+
 .button{
 	border: 1px solid black;
 	background-color:white;
