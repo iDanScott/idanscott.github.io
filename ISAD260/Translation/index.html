@@ -35,7 +35,7 @@
 				$(this).css("top", ($(this).parent().height() - 35) + "px");
 			});
 			
-			$("#txt-output").css("width", ($(window).width() - ($("#lbl-output").position().left + $("#lbl-output").width()) - $("#btn-say").width() - 50) + "px");
+			$("#txt-output").css("width", ($(window).width() - ($("#lbl-output").position().left + $("#lbl-output").width()) - 50) + "px");
 			$("#txt-output").css("height", ($("#lbl-output").height()));
 			$("#btn-say").css("height", ($("#lbl-output").height()));
 		}
@@ -50,14 +50,20 @@
 				$(this).append('<div class="button main-menu">Main menu</div>');
 			});
 			
+			
+			
 			$(".button").click(function() {
 				if ($(this).hasClass("audio")){ 
-					$(this).children().each(function() {
-						if ($(this).hasClass("phrase")) {
-							responsiveVoice.speak($(this).text());
-							$("#txt-output").val($(this).text());
-						}
-					});
+					if ($(this).hasClass("repeat")) {
+						responsiveVoice.speak($("#txt-output").val());
+					} else {
+						$(this).children().each(function() {
+							if ($(this).hasClass("phrase")) {
+								responsiveVoice.speak($(this).text());
+								$("#txt-output").val($(this).text());
+							}
+						});
+					}
 				} else if ($(this).hasClass("main-menu")) {
 					$(this).parent().hide();
 					$("#main-menu").show();
@@ -83,10 +89,12 @@
 			<p id="title">Augmented and Alternative Communication</p>
 			<div id="sound-output">
 				<p id="lbl-output">You are saying:</p><input type="text" id="txt-output" />
-				<input type="button" value="Say!" id="btn-say" />
 			</div>
 		</div>
 		<div id="container">
+			<div id="repeat-container" style="float:left; width:100%;">
+				<div class="button audio repeat" >Repeat</div>
+			</div>
 			<div id="main-menu">
 				<div class="button audio">Yes<p class="icon"><i class="fa fa-thumbs-o-up" style="color:lime" aria-hidden="true"></i></p><span class="phrase">Yes</span></div>
 				<div class="button audio">No<p class="icon"><i class="fa fa-thumbs-o-down" style="color:red" aria-hidden="true"></i></p><span class="phrase">No</span></div>
