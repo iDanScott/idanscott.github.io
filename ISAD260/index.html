@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Dear Diary</title>
+    <link rel="stylesheet" type="text/css" href="./diary.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script language="javascript">
+      $(function() {
+        $("#post").click(function() { 
+          var currentFeed = $("#feed").html();
+          currentFeed = "<p class='entry'><span class='timestamp'>" + $.datepicker.formatDate('dd M yy', new Date()) + " " 
+                        + new Date().toLocaleTimeString() +  "</span></br>" + $("#post_content").val() + "</p>" + currentFeed;
+          $("#feed").html(currentFeed);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="form_container">
+        <input type="text" name="content" id="post_content" />
+        <button id="post">Post</button>
+      </div>
+      <div id="feed"> 
+        
+      </div>
+    </div>
+  </body>
+
+</html>
