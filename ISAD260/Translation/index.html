@@ -15,10 +15,6 @@
 		  crossorigin="anonymous"></script>
 		  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 		<script language="javascript">
-		$.fn.child = function(s) {
-			return $(this).chilren(s)[0];
-		}
-		
 		function editHeights() {
 			var buttonWidth;
 			$(".button").each(function() {
@@ -40,10 +36,6 @@
 			$("#btn-say").css("height", ($("#lbl-output").height()));
 		}
 		
-		function checkRepeat() {
-			
-		}
-		
 		$(function() {
 			editHeights();
 			$(window).resize(function() {
@@ -62,7 +54,7 @@
 			});
 			
 			$(".sub-menu").each(function() {
-				$(this).append('<div class="button main-menu">Main menu<p class="icon"><i class="fa fa-arrow-left"></i></p></div>');
+				$(this).html('<div class="button main-menu">Main menu<p class="icon"><i class="fa fa-arrow-left"></i></p></div>' + $(this).html());
 			});
 			
 			$(".button").click(function() {
