@@ -1,0 +1,77 @@
+html,body{
+	margin:0;
+	padding:0;
+	height:100%;
+}
+
+body{
+	color:#4B4B4B;
+	position:relative;
+}
+
+#wrapper{
+	min-width:900px;
+	min-height:500px;
+}
+
+#home-image{
+	position:relative;
+	float:left;
+	width:100%;
+	min-width:1080px;
+	background-image:url('/web/20150420153939im_/http://idanscott.co.uk/img/me.jpg');
+	background-attachment:fixed;
+	background-repeat:no-repeat;
+	background-position:top right;
+	z-index:-1;
+}
+
+#home-image #short-bio{
+	position:fixed;
+	padding-top:100px;
+	padding-left:50px;
+	max-height:500px;
+	overflow:hidden;
+	width:30%;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+#navbar{
+	width:100%;
+	margin-top:-50px;
+	height:50px;
+	float:left;
+	top:0;
+	z-index:10;
+}
+
+#navbar ul{
+	position:relative;
+	list-style:none;
+	margin:0;
+	float:left;
+	padding: 0;
+}
+
+#navbar ul li{
+	margin:0;
+	width:33%;
+	padding-top:0;
+	text-align:center;
+}
+
+#about{
+	padding-top:25px;
+	background-color:white;
+	z-index:1;
+	margin-bottom:200px;
+}
+
+#portfolio{
+	padding-top:25px;
+	margin-bottom:500px;
+}
+
+#contact{
+	padding-top:25px;
+}
