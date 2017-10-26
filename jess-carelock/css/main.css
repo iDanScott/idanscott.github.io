@@ -1,0 +1,109 @@
+body,
+html{
+  margin:0;
+  padding:0;
+  font-family:arial;
+}
+
+#navbar-top ul {
+  border-bottom:1px solid #875728;
+}
+
+#navbar-top{
+  float:left;
+  width:100%;
+}
+
+.navbar ul{
+  list-style:none;
+  display:block;
+  margin:0 auto 0 auto;
+  padding:20px 0 20px 0;
+  float:left;
+  width:100%;
+}
+
+.navbar ul li {
+  float:left;
+  width:20%;
+  text-align:center;
+
+}
+
+.wrapper{
+  position:relative;
+  max-width:1300px;
+  width:90%;
+  margin:0 auto 0 auto;
+}
+
+#header-background{
+  float:left;
+  position:absolute;
+  top:0;
+  left:0;
+  height:500px;
+  width:100%;
+  background-image:url("../img/jess-face.jpg");
+  background-position:fixed;
+  background-repeat:no-repeat;
+  background-size:100%;
+  background-position:center;
+  overflow:hidden;
+}
+
+#books{
+  float:left;
+  background-color:#ffdec4;
+  font-family:'Times New Roman', Times, serif;
+  width:100%;
+}
+
+#latest-blog{
+  float:left;
+  font-family:'Times New Roman', Times, serif;
+  width:100%;
+}
+
+#latest-blog h1{
+  font-size:4em;
+  color:#655bff;
+}
+
+#latest-blog p.blog-title{
+  font-size:2em;
+  color:#000000;
+  margin:0;
+}
+
+#latest-blog p.blog-content {
+  font-size:1em;
+  margin:0;
+}
+
+
+#books h1{
+  font-size:4em;
+  color:#875728;
+}
+
+#header {
+  height:500px;
+}
+
+#header h1{
+  font-size:50pt;
+  padding-top:170px;
+  padding-left:100px;
+  color:#875728;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
+  width:550px;
+}
+
+#about-block {
+  float:left;
+  width:60%;
+  padding-top:50px;
+  padding-bottom:50px;
+  margin-left:20%;
+}
