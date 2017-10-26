@@ -1,0 +1,53 @@
+<html>
+  <head>
+<title>Dan Scott | Junior Developer | Home</title>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<meta name="description" content="Hi I'm Dan Scott, I'm 19 years of age and I'm a Junior Applications and Web Developer based in Alton Hampshire.">
+<meta name="keywords" content="Dan, Scott, Dan Scott, Junior Developer, iDanScott, Dan Scott Junior Web Developer, Dan Scott Junior Applications Developer, Dan Scott Developer, Dan Scott Web Developer, Dan Scott Applications Developer, Web Developer Alton, PHP Web Developer, PHP Web Developer Hampshire, Applications Developer Hampshire, Junior Developer Hampshire, Alton, GU34 2LB">
+<meta name="author" content="Dan Scott">
+<meta charset="UTF-8">		
+<script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script language="javascript" type="text/javascript" src="http://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+<script language="javascript" type="text/javascript" src="http://www.bitstorm.org/jquery/shadow-animation/jquery.animate-shadow.js"></script>
+<script language="javascript" type="text/javascript" src="http://idanscott.co.uk/js/page-functions.js"></script>		
+<script type="text/javascript">
+			$(document).ready(function(){
+				
+				$('#navbar ul li').click(function(){
+				var colourScheme = $(this).css('border-bottom-color');
+				var pageSplits = document.URL.split('/');
+				var pieces = $(this).text().split(" ");
+				var pageToLoad = pieces[0].toLowerCase();
+				pageToLoad += ".php";
+				if (pageSplits[pageSplits.length-1] != pageToLoad){
+
+					}
+				});
+			});
+		</script>
+    </head>
+      <body>
+        <div id="header">
+				<p style="color:#a5a5a5; font-size:18pt;"><span style="font-size:1.5em;" class="animate-text">Hi</span> there. My name's <span style="font-size:1.8em;"><span class="animate-text">D</span>an <span class="animate-text">S</span>cott</span>, I'm <span title="This was calculated server side :D">19</span> and I like to <span style="font-size:1.3em; font-family:'Inconsolata', Inconsolata, Monaco, Consolas, 'Courier New', monospace;" class="animate-text">Code</span>.</p>			</div>
+			<div id="navbar">
+				<ul>
+					<li style="border-bottom:0px solid #ff0000;">Home</li>
+					<li style="border-bottom:0px solid #0015ff;">About Me</li>
+					<li style="border-bottom:0px solid orange;">Portfolio</li>
+					<li style="border-bottom:0px solid #00c129;">Contact</li>
+				</ul>
+			</div>			<div id="loadingBarContainer"><div id="content-splitter"></div><div id="loadingBar"></div></div>
+			<div id="contentWrapper">
+				<div id="content"></div>
+			</div>
+			<div style="width:890px; margin-left:5px; height:3px; color:#a5a5a5; float:left;"></div>
+			<div id="footer">
+				<p style="width:100%; text-align:center; padding:0; margin:0; float:left;"><a href="http://uk.linkedin.com/pub/dan-scott/3a/4b9/3b/">LinkedIn</a> | <a href="http://twitter.com/iDanScott">Twitter</a> | &copy; Dan Scott 2013</p>
+				<p style="float:right; padding:0; margin:0; margin-right:5px; margin-top:-17px;">Proudly Powered By <a href="https://www.bhost.net/xen?afid=119728">BHost</a></p>			</div>
+    	</div>
+    </body>
+  </html>
