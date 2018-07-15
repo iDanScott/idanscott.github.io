@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Steven Universe</title>
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+
+    <script>
+        var episodes = [52, 26, 25, 25, 23];
+        var seasons = 5;
+        var onSeason = 0; 
+        var onEpisode = 0;
+        $(document).ready(function () {
+
+            $("#su-season").on("change", seasonChanged);
+            $("#su-episode").on("change", episodeChanged);
+            for (var i = 1; i < seasons + 1; i++) {
+                $("#su-season").append("<option>" + i + "</option>");
+            }
+            seasonChanged();
+        });
+
+        function seasonChanged() {
+            var $suSeason = $("#su-season");
+            var $suEpisode = $("#su-episode");
+            onSeason = parseInt($suSeason.val());
+            $suEpisode.empty();
+            for (var i = 1; i < episodes[$suSeason.val() - 1] + 1; i++) {
+                $suEpisode.append("<option>" + i + "</option>");
+            }
+        }
+
+        function episodeChanged() {
+            var $suSeason = $("#su-season");
+            var $suEpisode = $("#su-episode");
+            onEpisode = parseInt($suEpisode.val());
+            loadEpisode();
+        }
+
+        function loadEpisode() {
+            console.log("Steven Universe Season " + onSeason + " episode " + onEpisode);
+
+            var apiQuery = "https://www.googleapis.com/customsearch/v1/?q=Steven+Universe+Season+" + onSeason + "+Episode+" + onEpisode + "&key=AIzaSyB9hDskDF9X41g8f7-rDaCHvC_DfKPjCYc&cx=004069985485939271697:zjk2yhbczj0";
+
+            $.ajax({
+                url: apiQuery,
+                method: "GET",
+                success: function (data) {
+                    console.log(data.items[0].formattedUrl);
+                    var dataSplit = data.items[0].formattedUrl.split("/");
+                    var videoUrl = dataSplit[dataSplit.length - 1];
+                    console.log(videoUrl);
+                    dataSplit.pop();
+                    dataSplit.pop();
+                    dataSplit.push("embed/video");
+                    dataSplit.push(videoUrl);
+                    var embed = dataSplit.join("/");
+                    console.log(embed);
+                    $("#iframe-area").empty();
+                    $("#iframe-area").append("<iframe frameborder=\"0\" width=\"960\" height=\"540\" src=\"http://" + embed + "\" allowfullscreen allow=\"autoplay\"></iframe>");
+                }
+            });
+
+            $("#btn-previous").text("Episode " + (onEpisode - 1));
+            $("#btn-next").text("Episode " + (onEpisode + 1));
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <label for="su-season">Season:</label>
+            <select id="su-season">
+
+            </select>
+            <label for="su-episode">Episode:</label>
+            <select id="su-episode">
+
+            </select>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <button class="btn btn-primary" id="btn-previous">
+                    Episode X 
+                </button>
+            </div>
+            <div class="col-10" id="iframe-area">
+
+            </div>
+            <div class="col-1">
+                <button class="btn btn-primary" id="btn-next">
+                    Episode Y
+                </button>
+            </div>
+        </div>
+    </div>
+
+   
+</body>
+</html>
