@@ -74,7 +74,8 @@
                     dataSplit.push("embed/video");
                     dataSplit.push(videoUrl);
                     var embed = dataSplit.join("/");
-                    $("#backup-link").attr("href", "https://" + data.items[i].htmlFormattedUrl.split("https://")[1]);
+                    var htmlURL = data.items[i].formattedUrl;
+                    $("#backup-link").attr("href", "https://" + (htmlURL.includes("https://") ? htmlURL.split("https://")[1] : htmlURL.includes("http://") ? htmlURL.split("http://")[1] : htmlURL));
                     $("#iframe-area").empty();
                     $("#iframe-area").append("<iframe frameborder=\"0\" width=\"960\" height=\"540\" src=\"http://" + embed + "\" allowfullscreen allow=\"autoplay\"></iframe>");
                 }
