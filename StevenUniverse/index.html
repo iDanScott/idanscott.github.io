@@ -48,12 +48,23 @@
             }
         }
 
+        function appendHttp(url) {
+            var newUrl = url;
+            if (url.includes("https://")) {
+                newUrl = url.split("https://")[1];
+                newUrl = "http://" + newUrl;
+            } else if (!url.includes("http")) {
+                newUrl = "http://" + url; 
+            }
+            return newUrl;
+        }
+
         function loadEpisode(season, episode) {
             onEpisode = episode;
             onSeason = season;
             console.log("Steven Universe Season " + season + " episode " + episode);
 
-            var apiQuery = "https://www.googleapis.com/customsearch/v1/?q=Steven+Universe+Season+" + season + "+Episode+" + episode + "&key=AIzaSyAu_7YlurM_lHXSK_M6vV4Cuy1nDYMUWdA&cx=004069985485939271697:zjk2yhbczj0";
+            var apiQuery = "https://www.googleapis.com/customsearch/v1/?q=Steven+Universe+Season+" + season + "+Episode+" + episode + "&key=AIzaSyCtwDg0fF25uFxTLGc7znb7roB2wVfHAX4&cx=004069985485939271697:zjk2yhbczj0";
 
             $.ajax({
                 url: apiQuery,
@@ -62,9 +73,25 @@
                     console.log(data.items);
                     var i = 0;
                     var found = false;
-                    while ((i < data.items.length - 1) && !urlExists((data.items[i].formattedUrl.includes("https://") ? "" : "https://") + data.items[i].formattedUrl)) {
-                        if (urlExists(data.items[i].formattedUrl.includes("https://") ? "" : "https://") + data.items[i].formattedUrl) break;
-                        else i++;
+                    while (i < data.items.length - 1 && !found) {
+                        var urlToTest = appendHttp(data.items[i].formattedUrl);
+                        $.ajax({
+                            url: urlToTest, 
+                            method: "GET", 
+                            async: false,
+                            cache: false, 
+                            success: function(data) {
+                                found = true;
+                            }, 
+                            error: function(xhr, ajaxOptions, err) {
+                                if (xhr.status == 404) {
+                                    console.log("skipped " + data.items[i] + " because of a 404");
+                                    i++;
+                                } else {
+                                    found = true;
+                                }
+                            }
+                        });
                     }
 
                     var dataSplit = data.items[i].formattedUrl.split("/");
@@ -75,7 +102,7 @@
                     dataSplit.push(videoUrl);
                     var embed = dataSplit.join("/");
                     var htmlURL = data.items[i].formattedUrl;
-                    $("#backup-link").attr("href", "https://" + (htmlURL.includes("https://") ? htmlURL.split("https://")[1] : htmlURL.includes("http://") ? htmlURL.split("http://")[1] : htmlURL));
+                    $("#backup-link").attr("href", appendHttp(htmlURL));
                     $("#iframe-area").empty();
                     $("#iframe-area").append("<iframe frameborder=\"0\" width=\"960\" height=\"540\" src=\"http://" + embed + "\" allowfullscreen allow=\"autoplay\"></iframe>");
                 }
@@ -112,26 +139,6 @@
                 $btnPrevious.attr("onclick", "loadEpisode(" + season + "," + (episode - 1) + ")");
             }
             $("#backup").show();
-        }
-
-        function urlExists(url) {
-            try {
-                var request;
-                if (window.XMLHttpRequest)
-                    request = new XMLHttpRequest();
-                else
-                    request = new ActiveXObject("Microsoft.XMLHTTP");
-                request.open('GET', url, false);
-                request.send(); 
-                if (request.status === 404) {
-                    return false;
-                } else {
-                    return true;
-                }
-            } catch (err) {
-                return false;
-            }
-            return false;
         }
 
     </script>
