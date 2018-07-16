@@ -8,7 +8,7 @@
     <link href="Content/bootstrap.css" rel="stylesheet" />
 
     <script>
-        var episodes = [52, 26, 25, 25, 23];
+        var episodes = [57, 26, 25, 25, 23];
         var seasons = 5;
         var onSeason = 0; 
         var onEpisode = 0;
@@ -40,6 +40,8 @@
         }
 
         function loadEpisode(season, episode) {
+            onEpisode = episode;
+            onSeason = season;
             console.log("Steven Universe Season " + season + " episode " + episode);
 
             var apiQuery = "https://www.googleapis.com/customsearch/v1/?q=Steven+Universe+Season+" + season + "+Episode+" + episode + "&key=AIzaSyAu_7YlurM_lHXSK_M6vV4Cuy1nDYMUWdA&cx=004069985485939271697:zjk2yhbczj0";
@@ -71,11 +73,23 @@
 
             var $btnNext = $("#btn-next");
             var $btnPrevious = $("#btn-previous");
+            console.log(episodes[season - 1] + ", " + episode);
+            if (parseInt(episodes[season - 1]) == parseInt(episode)) { 
+                $btnNext.text("Season " + (season + 1));
+                $btnNext.attr("onclick", "loadEpisode(" + (season + 1) + ",1)");
+            } else {
+                $btnNext.text("Episode " + (episode + 1));
+                $btnNext.attr("onclick", "loadEpisode(" + season + "," + (episode + 1) + ")");
+            }
+            
+            if (episode == 1) {
+                $btnPrevious.text("Season " + (season - 1));
+                $btnPrevious.attr("onclick", "loadEpisode(" + (season - 1) + "," + episodes[onSeason] + ")");
+            } else {
+                $btnPrevious.text("Episode " + (episode - 1));
+                $btnPrevious.attr("onclick", "loadEpisode(" + season + "," + (episode - 1) + ")");
+            }
 
-            $btnNext.text("Episode " + (episode + 1));
-            $btnPrevious.text("Episode " + (episode - 1));
-            $btnPrevious.attr("onclick", "loadEpisode(" + season + "," + (episode - 1) + ")");
-            $btnNext.attr("onclick", "loadEpisode(" + season + "," + (episode + 1) + ")");
         }
 
         function urlExists(url) {
@@ -86,8 +100,7 @@
                 else
                     request = new ActiveXObject("Microsoft.XMLHTTP");
                 request.open('GET', url, false);
-                request.send(); // there will be a 'pause' here until the response to come.
-                // the object request will be actually modified
+                request.send(); 
                 if (request.status === 404) {
                     return false;
                 } else {
