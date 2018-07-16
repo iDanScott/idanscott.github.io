@@ -16,27 +16,36 @@
 
             $("#su-season").on("change", seasonChanged);
             $("#su-episode").on("change", episodeChanged);
+            $("#override-episodes").on("change", seasonChanged);
+            
+            $("#su-season").append("<option>...</option>");
             for (var i = 1; i < seasons + 1; i++) {
                 $("#su-season").append("<option>" + i + "</option>");
             }
             seasonChanged();
+            
         });
 
         function seasonChanged() {
             var $suSeason = $("#su-season");
             var $suEpisode = $("#su-episode");
-            onSeason = parseInt($suSeason.val());
-            $suEpisode.empty();
-            for (var i = 1; i < episodes[$suSeason.val() - 1] + 1; i++) {
-                $suEpisode.append("<option>" + i + "</option>");
+            if ($suSeason.val() != "...") {
+                onSeason = parseInt($suSeason.val());
+                $suEpisode.empty();
+                $suEpisode.append("<option>...</option>");
+                for (var i = 1; i < ($("#override-episodes").is(":checked") ? 100 : episodes[$suSeason.val() - 1] + 1); i++) {
+                    $suEpisode.append("<option>" + i + "</option>");
+                }
             }
         }
 
         function episodeChanged() {
             var $suSeason = $("#su-season");
             var $suEpisode = $("#su-episode");
-            onEpisode = parseInt($suEpisode.val());
-            loadEpisode(onSeason, onEpisode);
+            if ($suEpisode.val() != "...") {
+                onEpisode = parseInt($suEpisode.val());
+                loadEpisode(onSeason, onEpisode);
+            }
         }
 
         function loadEpisode(season, episode) {
@@ -82,6 +91,18 @@
                 $btnNext.attr("onclick", "loadEpisode(" + season + "," + (episode + 1) + ")");
             }
             
+            if (season == seasons && episodes[season - 1] == episode) {
+                $btnNext.hide();
+            } else {
+                $btnNext.show();
+            }
+            
+            if (season == 1 && episode == 1) {
+                $btnPrevious.hide();
+            } else {
+                $btnPrevious.show();
+            }
+            
             if (episode == 1) {
                 $btnPrevious.text("Season " + (season - 1));
                 $btnPrevious.attr("onclick", "loadEpisode(" + (season - 1) + "," + episodes[onSeason] + ")");
@@ -89,7 +110,7 @@
                 $btnPrevious.text("Episode " + (episode - 1));
                 $btnPrevious.attr("onclick", "loadEpisode(" + season + "," + (episode - 1) + ")");
             }
-
+            $("#backup").show();
         }
 
         function urlExists(url) {
@@ -125,6 +146,12 @@
             <select id="su-episode">
 
             </select>
+            <div class="clear"></div>
+        </div>
+        <div class="row">
+            <input type="checkbox" id="override-episodes" />
+            <label for="override-episodes">Override the predefined number of episodes per season?</label>
+            <i class="text-danger">Only use this option if the predefined number of episodes does not include all of the available episodes for the season you are on.</i>
         </div>
         <div class="row">
             <div class="col-1">
@@ -142,7 +169,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="text-center">If the video did not load, <a id="backup-link" href="" target="_blank">click this link</a></div>
+            <div class="text-center" style="display:none" id="backup">If the video did not load, <a id="backup-link" href="" target="_blank">click this link</a></div>
         </div>
     </div>
 
