@@ -13,7 +13,7 @@
 
 #splash-screen .background::after {
     content: "";
-    background-image: url('../../Images/window.jpg');
+    background-image: url('../Images/window.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
