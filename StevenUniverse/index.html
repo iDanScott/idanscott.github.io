@@ -8,7 +8,7 @@
     <link href="Content/bootstrap.css" rel="stylesheet" />
 
     <script>
-        var episodes = [52, 26, 25, 25, 23];
+        var episodes = [57, 26, 25, 25, 23];
         var seasons = 5;
         var onSeason = 0; 
         var onEpisode = 0;
@@ -16,33 +16,55 @@
 
             $("#su-season").on("change", seasonChanged);
             $("#su-episode").on("change", episodeChanged);
+            $("#override-episodes").on("change", seasonChanged);
+            
+            $("#su-season").append("<option>...</option>");
             for (var i = 1; i < seasons + 1; i++) {
                 $("#su-season").append("<option>" + i + "</option>");
             }
             seasonChanged();
+            
         });
 
         function seasonChanged() {
             var $suSeason = $("#su-season");
             var $suEpisode = $("#su-episode");
-            onSeason = parseInt($suSeason.val());
-            $suEpisode.empty();
-            for (var i = 1; i < episodes[$suSeason.val() - 1] + 1; i++) {
-                $suEpisode.append("<option>" + i + "</option>");
+            if ($suSeason.val() != "...") {
+                onSeason = parseInt($suSeason.val());
+                $suEpisode.empty();
+                $suEpisode.append("<option>...</option>");
+                for (var i = 1; i < ($("#override-episodes").is(":checked") ? 100 : episodes[$suSeason.val() - 1] + 1); i++) {
+                    $suEpisode.append("<option>" + i + "</option>");
+                }
             }
         }
 
         function episodeChanged() {
             var $suSeason = $("#su-season");
             var $suEpisode = $("#su-episode");
-            onEpisode = parseInt($suEpisode.val());
-            loadEpisode(onSeason, onEpisode);
+            if ($suEpisode.val() != "...") {
+                onEpisode = parseInt($suEpisode.val());
+                loadEpisode(onSeason, onEpisode);
+            }
+        }
+
+        function appendHttp(url) {
+            var newUrl = url;
+            if (url.includes("https://")) {
+                newUrl = url.split("https://")[1];
+                newUrl = "http://" + newUrl;
+            } else if (!url.includes("http")) {
+                newUrl = "http://" + url; 
+            }
+            return newUrl;
         }
 
         function loadEpisode(season, episode) {
+            onEpisode = episode;
+            onSeason = season;
             console.log("Steven Universe Season " + season + " episode " + episode);
 
-            var apiQuery = "https://www.googleapis.com/customsearch/v1/?q=Steven+Universe+Season+" + season + "+Episode+" + episode + "&key=AIzaSyAu_7YlurM_lHXSK_M6vV4Cuy1nDYMUWdA&cx=004069985485939271697:zjk2yhbczj0";
+            var apiQuery = "https://www.googleapis.com/customsearch/v1/siterestrict?q=Steven+Universe+Season+" + season + "+Episode+" + episode + "&key=AIzaSyBSLKQsHXidNyR4A7NOa_aVltceomQ3iyM&cx=004069985485939271697:zjk2yhbczj0";
 
             $.ajax({
                 url: apiQuery,
@@ -51,9 +73,25 @@
                     console.log(data.items);
                     var i = 0;
                     var found = false;
-                    while ((i < data.items.length - 1) && !urlExists((data.items[i].formattedUrl.includes("https://") ? "" : "https://") + data.items[i].formattedUrl)) {
-                        if (urlExists(data.items[i].formattedUrl.includes("https://") ? "" : "https://") + data.items[i].formattedUrl) break;
-                        else i++;
+                    while (i < data.items.length - 1 && !found) {
+                        var urlToTest = appendHttp(data.items[i].formattedUrl);
+                        $.ajax({
+                            url: urlToTest, 
+                            method: "GET", 
+                            async: false,
+                            cache: false, 
+                            success: function(data) {
+                                found = true;
+                            }, 
+                            error: function(xhr, ajaxOptions, err) {
+                                if (xhr.status == 404) {
+                                    console.log("skipped " + data.items[i] + " because of a 404");
+                                    i++;
+                                } else {
+                                    found = true;
+                                }
+                            }
+                        });
                     }
 
                     var dataSplit = data.items[i].formattedUrl.split("/");
@@ -63,7 +101,8 @@
                     dataSplit.push("embed/video");
                     dataSplit.push(videoUrl);
                     var embed = dataSplit.join("/");
-                    $("#backup-link").attr("href", "https://" + data.items[i].htmlFormattedUrl.split("https://")[1]);
+                    var htmlURL = data.items[i].formattedUrl;
+                    $("#backup-link").attr("href", appendHttp(htmlURL));
                     $("#iframe-area").empty();
                     $("#iframe-area").append("<iframe frameborder=\"0\" width=\"960\" height=\"540\" src=\"http://" + embed + "\" allowfullscreen allow=\"autoplay\"></iframe>");
                 }
@@ -71,32 +110,34 @@
 
             var $btnNext = $("#btn-next");
             var $btnPrevious = $("#btn-previous");
-
-            $btnNext.text("Episode " + (episode + 1));
-            $btnPrevious.text("Episode " + (episode - 1));
-            $btnPrevious.attr("onclick", "loadEpisode(" + season + "," + (episode - 1) + ")");
-            $btnNext.attr("onclick", "loadEpisode(" + season + "," + (episode + 1) + ")");
-        }
-
-        function urlExists(url) {
-            try {
-                var request;
-                if (window.XMLHttpRequest)
-                    request = new XMLHttpRequest();
-                else
-                    request = new ActiveXObject("Microsoft.XMLHTTP");
-                request.open('GET', url, false);
-                request.send(); // there will be a 'pause' here until the response to come.
-                // the object request will be actually modified
-                if (request.status === 404) {
-                    return false;
-                } else {
-                    return true;
-                }
-            } catch (err) {
-                return false;
+            if (parseInt(episodes[season - 1]) == parseInt(episode)) { 
+                $btnNext.text("Season " + (season + 1));
+                $btnNext.attr("onclick", "loadEpisode(" + (season + 1) + ",1)");
+            } else {
+                $btnNext.text("Episode " + (episode + 1));
+                $btnNext.attr("onclick", "loadEpisode(" + season + "," + (episode + 1) + ")");
             }
-            return false;
+            
+            if (season == seasons && episodes[season - 1] == episode) {
+                $btnNext.hide();
+            } else {
+                $btnNext.show();
+            }
+            
+            if (season == 1 && episode == 1) {
+                $btnPrevious.hide();
+            } else {
+                $btnPrevious.show();
+            }
+            
+            if (episode == 1) {
+                $btnPrevious.text("Season " + (season - 1));
+                $btnPrevious.attr("onclick", "loadEpisode(" + (season - 1) + "," + episodes[onSeason] + ")");
+            } else {
+                $btnPrevious.text("Episode " + (episode - 1));
+                $btnPrevious.attr("onclick", "loadEpisode(" + season + "," + (episode - 1) + ")");
+            }
+            $("#backup").show();
         }
 
     </script>
@@ -112,6 +153,12 @@
             <select id="su-episode">
 
             </select>
+            <div class="clear"></div>
+        </div>
+        <div class="row">
+            <input type="checkbox" id="override-episodes" />
+            <label for="override-episodes">Override the predefined number of episodes per season?</label>
+            <i class="text-danger">Only use this option if the predefined number of episodes does not include all of the available episodes for the season you are on.</i>
         </div>
         <div class="row">
             <div class="col-1">
@@ -129,7 +176,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="text-center">If the video did not load, <a id="backup-link" href="" target="_blank">click this link</a></div>
+            <div class="text-center" style="display:none" id="backup">If the video did not load, <a id="backup-link" href="" target="_blank">click this link</a></div>
         </div>
     </div>
 
