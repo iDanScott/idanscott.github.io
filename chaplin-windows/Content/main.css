@@ -13,7 +13,7 @@
 
 #splash-screen .background::after {
     content: "";
-    background-image: url('/Images/window.jpg');
+    background-image: url('../Images/window.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -62,7 +62,7 @@ nav.fixed-top.scrolled.bg-light {
 
 #testimonials .background::after {
     content: "";
-    background-image: url('/Images/family-in-front-of-house.jpg');
+    background-image: url('../Images/family-in-front-of-house.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
