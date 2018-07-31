@@ -47,6 +47,10 @@ nav.fixed-top .navbar-nav{
     transition: all 0.5s ease;
 }
 
+.navbar-nav {
+    text-align:center;
+}
+
 nav.fixed-top.scrolled.bg-transparent,
 nav.fixed-top.scrolled.bg-light {
     -webkit-transition: all 0.5s ease;
@@ -94,4 +98,8 @@ nav.fixed-top.scrolled.bg-light {
     bottom: 0;
     right: 0;
     z-index: -1;
+}
+
+#partners .row .col-md-2{
+    text-align: center;
 }
