@@ -20,7 +20,7 @@
     background-size: cover;
     position: absolute;
     z-index: -2;
-    opacity: 0.3;
+    opacity: 0.2;
     top: 0;
     left: 0;
     bottom: 0;
@@ -32,7 +32,7 @@
 }
 
 nav a:link, nav a:visited {
-    color: #666567;
+    color: #282828;
     font-weight: bold;
 }
 
@@ -102,4 +102,8 @@ nav.fixed-top.scrolled.bg-light {
 
 #partners .row .col-md-2{
     text-align: center;
+}
+
+#partners, #contact {
+    padding: 50px 0 50px 0;
 }
