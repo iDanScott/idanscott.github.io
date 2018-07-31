@@ -1,0 +1,97 @@
+﻿body, html {
+    width:100%;
+    height:100%;
+}
+
+
+#splash-screen {
+    position:relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#splash-screen .background::after {
+    content: "";
+    background-image: url('/Images/window.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: absolute;
+    z-index: -2;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+#website-logo {
+    text-align:center;
+}
+
+nav a:link, nav a:visited {
+    color: #666567;
+    font-weight: bold;
+}
+
+nav.fixed-top.scrolled,
+nav.fixed-top.scrolled .navbar-nav, 
+nav.fixed-top, 
+nav.fixed-top .navbar-nav{
+    width: 100%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+nav.fixed-top.scrolled.bg-transparent,
+nav.fixed-top.scrolled.bg-light {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#testimonials {
+    position: relative;
+    overflow: hidden;
+}
+
+#testimonials .background::after {
+    content: "";
+    background-image: url('/Images/family-in-front-of-house.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: absolute;
+    z-index: -1;
+    opacity:0.3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.testimonial {
+    position:relative;
+    padding:10% 15% 10% 15%;
+    margin:0 auto 0 auto;
+    color:#bdbdbd;
+    overflow:hidden;
+}
+
+.testimonial::after {
+    content: "";
+    background-color: #262626;
+    position: absolute;
+    opacity: 0.9;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
