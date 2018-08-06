@@ -1,0 +1,122 @@
+@{ 
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ben Test</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+        var barchart = null;
+        var piechart = null;
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        var data = {};
+        var apiData = {};
+        $(function () {
+            apiData = $.get("http://idanscott.co.uk/benproxy/?proxyto=https://explorelearning.topdesk.net/tas/api/incidents/&authorization=SVQgQVBJOjM0M3Z5LXZ5anQzLWMzZXprLXNxc3dhLWVxeWhs&prettyprint=true", function (JSON) { 
+                data.labels = ["Still Open"];
+                data.closedIn = [];
+                data.stillOpen = 0;
+                var index = -1;
+                var onMonth = "";
+                console.log(JSON);
+
+                for (var i = 0; i < JSON.length; i++) {
+                    if (JSON[i].closed) {
+                        var month = monthNames[new Date(Date.parse(JSON[i].closedDate)).getMonth()];
+                        if (month != onMonth) {
+                            index += 1;
+                            onMonth = month;
+                        }
+                        if (data.closedIn.length < index + 1) {
+                            data.closedIn.push(0);
+                        }
+                        data.closedIn[index]++;
+                        if (!data.labels.includes(month)) {
+                            data.labels.push(month);
+                        }
+                    } else {
+                        data.stillOpen++;
+                    }
+                }
+                barchart = drawChart(data, barchart, "bar", "barchart");
+                piechart = drawChart(data, piechart, "pie", "piechart");
+            });
+        });
+
+        function drawChart(data, chartObj, type, container) {
+            if (chartObj != null) chartObj.destroy();
+            var ctx = $("#" + container);
+            var newdata = [data.stillOpen];
+
+            for (var i = 0; i < data.closedIn.length; i++) {
+                newdata.push(data.closedIn[i]);
+            }
+
+            var chartObj = new Chart(ctx, {
+                type: type,
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: "Tickets closed by month (" + type + "chart)",
+                        data: newdata,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    title: {
+                            display: true,
+                            text: "Tickets closed by month (" + type + "chart)"
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            return chartObj;
+        }
+    </script>
+</head>   
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" id="barchart-container">
+                    <canvas id="barchart" width="400" height="400"></canvas>
+                </div>
+                <div class="col-md-6" id="piechart-container">
+                    <canvas id="piechart" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
