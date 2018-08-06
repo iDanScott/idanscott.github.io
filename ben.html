@@ -25,48 +25,36 @@
             timer = setInterval(pollAPI, 1000);
         });
 
-        function pollAPI() {
-            apiData = $.get("http://idanscott.co.uk/benproxy/?proxyto=https://explorelearning.topdesk.net/tas/api/incidents/&authorization=SVQgQVBJOjM0M3Z5LXZ5anQzLWMzZXprLXNxc3dhLWVxeWhs&prettyprint=true", function (JSON) {
-                data.labels = ["Still Open"];
-                data.closedIn = [];
-                data.stillOpen = 0;
-                var index = -1;
-                var onMonth = "";
+        function arraysEqual(a, b) {
+            if (a === b) return true;
+            if (a == null || b == null) return false;
+            if (a.length != b.length) return false;
+            for (var i = 0; i < a.length; ++i) {
+                if (a[i] !== b[i]) return false;
+            }
+            return true;
+        }
 
-                for (var i = 0; i < JSON.length; i++) {
-                    if (JSON[i].closed) {
-                        var month = monthNames[new Date(Date.parse(JSON[i].closedDate)).getMonth()];
-                        if (month != onMonth) {
-                            index += 1;
-                            onMonth = month;
-                        }
-                        if (data.closedIn.length < index + 1) {
-                            data.closedIn.push(0);
-                        }
-                        data.closedIn[index]++;
-                        if (!data.labels.includes(month)) {
-                            data.labels.push(month);
-                        }
-                    } else {
-                        data.stillOpen++;
-                    }
+        function pollAPI() {
+            apiData = $.get("http://idanscott.co.uk/benproxy/explorelearning/closed/?authorization=SVQgQVBJOjM0M3Z5LXZ5anQzLWMzZXprLXNxc3dhLWVxeWhs", function (JSON) {
+                var data = {
+                    labels: Object.keys(JSON), 
+                    data: Object.values(JSON),
                 }
-                if (cached != data) {
-                    barchart = drawChart(data, barchart, "bar", "barchart");
-                    piechart = drawChart(data, piechart, "pie", "piechart");
+                
+                if (!arraysEqual(data.labels, cached.labels) && !arraysEqual(data.data, cached.data)) {
+                    barchart = buildChart(data, barchart, "bar", "barchart");
+                    piechart = buildChart(data, piechart, "pie", "piechart");
+                    console.log(data);
+                    console.log(cached);
                 }
                 cached = data;
             });
         }
 
-        function drawChart(data, chartObj, type, container) {
+        function buildChart(data, chartObj, type, container) {
             if (chartObj != null) chartObj.destroy();
             var ctx = $("#" + container);
-            var newdata = [data.stillOpen];
-
-            for (var i = 0; i < data.closedIn.length; i++) {
-                newdata.push(data.closedIn[i]);
-            }
 
             var chartObj = new Chart(ctx, {
                 type: type,
@@ -74,7 +62,7 @@
                     labels: data.labels,
                     datasets: [{
                         label: "Tickets closed by month (" + type + "chart)",
-                        data: newdata,
+                        data: data.data,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
