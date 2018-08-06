@@ -13,19 +13,25 @@
     <script>
         var barchart = null;
         var piechart = null;
+        var timer;
+        var cached = {};
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         ];
         var data = {};
         var apiData = {};
         $(function () {
-            apiData = $.get("http://idanscott.co.uk/benproxy/?proxyto=https://explorelearning.topdesk.net/tas/api/incidents/&authorization=SVQgQVBJOjM0M3Z5LXZ5anQzLWMzZXprLXNxc3dhLWVxeWhs&prettyprint=true", function (JSON) { 
+            pollAPI();
+            timer = setInterval(pollAPI, 1000);
+        });
+
+        function pollAPI() {
+            apiData = $.get("http://idanscott.co.uk/benproxy/?proxyto=https://explorelearning.topdesk.net/tas/api/incidents/&authorization=SVQgQVBJOjM0M3Z5LXZ5anQzLWMzZXprLXNxc3dhLWVxeWhs&prettyprint=true", function (JSON) {
                 data.labels = ["Still Open"];
                 data.closedIn = [];
                 data.stillOpen = 0;
                 var index = -1;
                 var onMonth = "";
-                console.log(JSON);
 
                 for (var i = 0; i < JSON.length; i++) {
                     if (JSON[i].closed) {
@@ -45,10 +51,13 @@
                         data.stillOpen++;
                     }
                 }
-                barchart = drawChart(data, barchart, "bar", "barchart");
-                piechart = drawChart(data, piechart, "pie", "piechart");
+                if (cached != data) {
+                    barchart = drawChart(data, barchart, "bar", "barchart");
+                    piechart = drawChart(data, piechart, "pie", "piechart");
+                }
+                cached = data;
             });
-        });
+        }
 
         function drawChart(data, chartObj, type, container) {
             if (chartObj != null) chartObj.destroy();
