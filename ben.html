@@ -45,8 +45,6 @@
                 if (!arraysEqual(data.labels, cached.labels) && !arraysEqual(data.data, cached.data)) {
                     barchart = buildChart(data, barchart, "bar", "barchart");
                     piechart = buildChart(data, piechart, "pie", "piechart");
-                    console.log(data);
-                    console.log(cached);
                 }
                 cached = data;
             });
