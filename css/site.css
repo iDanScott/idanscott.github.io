@@ -1,0 +1,62 @@
+body, 
+html {
+    height: 100%;
+    background-image:url("../img/background.png");
+    background-repeat: repeat;
+    background-color: white;
+}
+
+span.dotnet {
+    color: white;
+    background-color: #7C007C;
+    padding:0 10px 0 10px;
+}
+
+.text-dotted-underline {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+.typing {
+    border-right: 2px solid #000;
+    -webkit-animation: caret 1s steps(1) infinite;
+    animation: caret 1s steps(1) infinite;
+}
+
+@keyframes caret {
+    from, to { border-color: transparent }
+    50% { border-color: #000; }
+}
+
+.icon-link {
+    font-size: 4rem;
+}
+
+.icon-link a:link, 
+.icon-link a:visited {
+    color: #000;
+}
+
+.social-twitter a:hover {
+    color: #1DA1F2;
+}
+
+.social-github a:hover {
+    color: #7C007C;
+}
+
+.social-linkedin a:hover {
+    color: #0271AE;
+}
+
+.social-email a:hover {
+    color: #7c7c7c;
+}
+
+.icon-link a:hover{
+    -webkit-transition: color 200ms linear;
+    -moz-transition: color 200ms linear;
+    -ms-transition: color 200ms linear;
+    -o-transition: color 200ms linear;
+    transition: color 200ms linear;
+}
